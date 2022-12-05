@@ -4,11 +4,11 @@ import classes from './MainHeader.module.css';
 
 function MainHeader() {
   return (
-    <header classeName={classes.header}>
+    <header className={classes.header}>
       <div className={classes.logo}>
         <Link href="/">NextEvents</Link>
       </div>
-      <nav classeName={classes.navigation}>
+      <nav className={classes.navigation}>
         <ul>
           <li>
             <Link href="/events">All Events</Link>
