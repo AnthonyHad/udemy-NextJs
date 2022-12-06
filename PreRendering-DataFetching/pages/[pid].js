@@ -6,9 +6,11 @@ import { Fragment } from 'react';
 function ProductDetailPage(props) {
   const { loadedProduct } = props;
 
+  //used if fallback is set to true
   if (!loadedProduct) {
     return <p>Loading...</p>;
   }
+
   return (
     <Fragment>
       <h1>{loadedProduct.title}</h1>
@@ -37,6 +39,12 @@ export async function getStaticProps(context) {
 
   const product = data.products.find((product) => product.id === productId);
 
+  if (!product) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       loadedProduct: product,
@@ -60,7 +68,7 @@ export async function getStaticPaths() {
     //false generates all pages.
     //switching to true helps pre generate specific pages and postpone the pre-generation of other pages to just in time
     //using true would need a fallback state in the component function for Loading
-    // otherwise we can just use "blocking" as a value
+    // otherwise we can just use "blocking" as a value which takes slightly more time
     fallback: false,
   };
 }
