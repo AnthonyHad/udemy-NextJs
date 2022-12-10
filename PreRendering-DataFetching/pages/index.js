@@ -9,7 +9,7 @@ function HomePage(props) {
     <ul>
       {products.map((product) => (
         <li key={product.id}>
-          <Link href={`/${product.id}`}>{product.title}</Link>
+          <Link href={`/products${product.id}`}>{product.title}</Link>
         </li>
       ))}
     </ul>
@@ -24,6 +24,7 @@ function HomePage(props) {
 // However, if the data changes we have to rebuild the page. Or use ISR
 // ISR > Pre-generate then Re-generate it on every request at most every X seconds
 // serve old page or serve new
+// we do not have access to the actual incoming request
 export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json');
   const jsonData = await fs.readFile(filePath);
