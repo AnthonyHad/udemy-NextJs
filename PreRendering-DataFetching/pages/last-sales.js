@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-function LastSalesPage() {
-  const [sales, setSales] = useState();
+//client side data detching
+//Examples: - Data changing with high frequency (stock data)
+//          - Highly user specifc data (lat order in an online shop)
+//          - Partial data (data used only on a part of the page)
+
+function LastSalesPage(props) {
+  const [sales, setSales] = useState(props.sales);
   // const [isLoading, setIsLoading] = useState(false);
 
   const { data, error } = useSWR(
@@ -49,7 +54,8 @@ function LastSalesPage() {
   }
 
   // This is only what is available in the page source
-  if (!data || !sales) {
+  // if not use getStaticProps
+  if (!data && !sales) {
     return <p>Loading....</p>;
   }
 
@@ -64,9 +70,24 @@ function LastSalesPage() {
   );
 }
 
-export default LastSalesPage;
+export async function getStaticProps() {
+  const response = await fetch(
+    'https://nextjs-course-d8498-default-rtdb.europe-west1.firebasedatabase.app/sales.json'
+  );
+  const data = await response.json();
 
-//client side data detching
-//Examples: - Data changing with high frequency (stock data)
-//          - Highly user specifc data (lat order in an online shop)
-//          - Partial data (data used only on a part of the page)
+  const transformedSales = [];
+  for (const key in data) {
+    transformedSales.push({
+      id: key,
+      username: data[key].username,
+      volume: data[key].volume,
+    });
+  }
+  return {
+    props: { sales: transformedSales },
+    revalidate: 10,
+  };
+}
+
+export default LastSalesPage;
