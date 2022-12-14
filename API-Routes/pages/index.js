@@ -9,7 +9,19 @@ function HomePage() {
     const enteredEmail = email.current.value;
     const enteredFeedback = feedback.current.value;
 
+    const reqBody = { email: enteredEmail, text: enteredFeedback };
+    console.log(reqBody);
+
     //can add validation here
+    fetch('/api/feedback', {
+      method: 'POST',
+      body: JSON.stringify(reqBody),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((responses) => responses.json())
+      .then((data) => console.log(data));
   }
   return (
     <div>
