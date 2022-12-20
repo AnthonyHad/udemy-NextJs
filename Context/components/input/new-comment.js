@@ -25,6 +25,7 @@ function NewComment(props) {
       enteredComment.trim() === ''
     ) {
       setIsInvalid(true);
+
       return;
     }
 
