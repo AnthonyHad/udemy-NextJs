@@ -5,7 +5,7 @@ import Hero from '../components/home-page/hero';
 
 const DUMMY_POSTS = [
   {
-    slug: 'getting-started-with-nextJS',
+    slug: 'getting-started-with-nextjs',
     title: 'getting-started-with-nextJS',
     image: 'getting-started-nextjs.png',
     excerpt:
@@ -13,7 +13,7 @@ const DUMMY_POSTS = [
     date: '2022-02-10',
   },
   {
-    slug: 'getting-started-with-nextJS2',
+    slug: 'getting-started-with-nextjs2',
     title: 'getting-started-with-nextJS',
     image: 'getting-started-nextjs.png',
     excerpt:
@@ -21,7 +21,7 @@ const DUMMY_POSTS = [
     date: '2022-02-10',
   },
   {
-    slug: 'getting-started-with-nextJS3',
+    slug: 'getting-started-with-nextjs3',
     title: 'getting-started-with-nextJS',
     image: 'getting-started-nextjs.png',
     excerpt:
@@ -29,7 +29,7 @@ const DUMMY_POSTS = [
     date: '2022-02-10',
   },
   {
-    slug: 'getting-started-with-nextJS4',
+    slug: 'getting-started-with-nextjs4',
     title: 'getting-started-with-nextJS',
     image: 'getting-started-nextjs.png',
     excerpt:
