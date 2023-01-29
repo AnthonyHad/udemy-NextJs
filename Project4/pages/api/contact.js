@@ -1,4 +1,6 @@
-function handler(req, res) {
+import { MongoClient } from 'mongodb';
+
+async function handler(req, res) {
   if (req.method === 'POST') {
     const { email, name, message } = req.body;
     if (
@@ -19,7 +21,29 @@ function handler(req, res) {
       name,
       message,
     };
-    console.log(newMessage);
+
+    let client;
+
+    try {
+      client = await MongoClient.connect(
+        'mongodb+srv://antho:3fgvQDk6lYobFBay@cluster0.zqmklxs.mongodb.net/my-blog?retryWrites=true&w=majority'
+      );
+    } catch (error) {
+      res.status(500).json({ message: 'Could not connect' });
+      return;
+    }
+    const db = client.db();
+
+    try {
+      const result = await db.collection('messages').insertOne(newMessage);
+      newMessage.id = result.insertedId;
+    } catch (error) {
+      client.close();
+      res.status(500).json({ message: 'Storing message failed!' });
+      return;
+    }
+
+    client.close();
 
     res
       .status(201)
