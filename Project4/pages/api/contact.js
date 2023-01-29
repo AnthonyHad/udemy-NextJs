@@ -3,7 +3,7 @@ function handler(req, res) {
     const { email, name, message } = req.body;
     if (
       !email ||
-      !includes('@') ||
+      !email.includes('@') ||
       !name ||
       name.trim() === '' ||
       !message ||
