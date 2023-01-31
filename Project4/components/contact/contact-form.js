@@ -30,9 +30,8 @@ function ContactForm() {
         setRequestStatus(null);
         setRequestError(null);
       }, 3000);
+      return () => clearTimeout(timer);
     }
-
-    return () => clearTimeout(timer);
   }, [requestStatus]);
 
   async function sendMessageHandler(event) {
@@ -47,6 +46,9 @@ function ContactForm() {
         message: enteredMessage,
       });
       setRequestStatus('success');
+      setEnteredEmail('');
+      setEnteredMessage('');
+      setEnteredName('');
     } catch (error) {
       setRequestError(error);
       setRequestStatus('error');
