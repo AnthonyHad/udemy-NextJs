@@ -33,7 +33,7 @@ export async function getStaticPaths() {
 
   client.close();
   return {
-    fallback: false, // false means that you indicated all of the paths
+    fallback: 'blocking', // false means that you indicated all of the paths (blocking user will not see anything before the data is fetched/true will cache the page )
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
